@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+		<PackageReference Include="System.Linq.Async" Version="5.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\EqualityComparer.Abstractions\EqualityComparer.Abstractions.csproj" />
+		<ProjectReference Include="..\Persistance.Abstractions\Persistance.Abstractions.csproj" />
+		<ProjectReference Include="..\QB.Domain\QB.Domain.csproj" />
+	</ItemGroup>
+
+</Project>
