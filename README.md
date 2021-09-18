@@ -3,6 +3,9 @@
 **Main Nuggets:**
 - Swagger
 - AutoMapper
+- Moq
+- xUnit
+- Fluent Assertion
 
 **Patterns:**
 - Clean Architecture
@@ -10,5 +13,8 @@
 - Repository
 - Unit Of Work
 
-Task link:
-[Click here!](https://github.com/QuickBase/interview-demos/tree/master/c%23)
+**Persistence:**
+- SQLite
+
+*Task link:*
+*[Click here!](https://github.com/QuickBase/interview-demos/tree/master/c%23)*

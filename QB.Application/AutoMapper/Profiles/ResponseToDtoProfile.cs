@@ -4,9 +4,9 @@ using System;
 
 namespace QB.Application.AutoMapper.Profiles
 {
-    public class ResponseToDto : Profile
+    public class ResponseToDtoProfile : Profile
     {
-        public ResponseToDto()
+        public ResponseToDtoProfile()
         {
             CreateMap<Tuple<string, int>, CountryPopulationDto>()
                 .ForMember(dest => dest.CountryName, opt => opt.MapFrom(s => s.Item1))
