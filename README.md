@@ -6,6 +6,7 @@
 - Moq
 - xUnit
 - Fluent Assertion
+- Serilog
 
 **Patterns:**
 - Clean Architecture
