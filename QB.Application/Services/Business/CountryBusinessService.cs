@@ -7,6 +7,7 @@ using QB.Application.Interfaces.InfrastuctureServices;
 using QB.Application.Interfaces.Services.Business;
 using QB.Application.Interfaces.Services.Utility;
 using QB.Application.Services.Business.Base;
+using QB.Domain.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -74,6 +75,38 @@ namespace QB.Application.Services.Business
             var unionListDtos = databaseCountryPopulationDtoList.Union(normalizeExternalCountryPopulationDtoList, comparer).ToList();
 
             return unionListDtos;
+        }
+
+        public async Task<CountryDto> CreateCountryAsync(CountryDto request)
+        {
+            var entity = _mapper.Map<Country>(request);
+            await _unitOfWork.Countries.AddAsync(entity);
+            var result = _unitOfWork.Commit();
+
+            var country = await _unitOfWork.Countries.FindCountryByNameAsync(request.CountryName);
+            var countryDto = _mapper.Map<CountryDto>(country);
+            return countryDto;
+        }
+
+        public async Task<CountryDto> UpdateCountryAsync(CountryDto request)
+        {
+            var entity = _mapper.Map<Country>(request);
+            await _unitOfWork.Countries.UpdateAsync(entity);
+            var result = _unitOfWork.Commit();
+
+            var country = await _unitOfWork.Countries.GetAsync(request.CountryId);
+            var countryDto = _mapper.Map<CountryDto>(country);
+
+            return countryDto;
+        }
+
+        public async Task<CountryDto> DeleteCountryAsync(CountryDto request)
+        {
+            var entity = _mapper.Map<Country>(request);
+            await _unitOfWork.Countries.DeleteAsync(entity);
+            var result = _unitOfWork.Commit();
+
+            return request;
         }
     }
 }

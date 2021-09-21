@@ -3,6 +3,7 @@ using QB.Application.Dtos;
 using QB.Application.Interfaces.InfrastuctureServices;
 using QB.Application.Interfaces.Services.Business;
 using QB.Application.Services.Business.Base;
+using QB.Domain.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -29,6 +30,39 @@ namespace QB.Application.Services.Business
             var stateDtos = _mapper.Map<IEnumerable<StateDto>>(states);
 
             return stateDtos;
+        }
+
+        public async Task<StateDto> CreateStateAsync(StateDto request)
+        {
+            var entity = _mapper.Map<State>(request);
+            await _unitOfWork.States.AddAsync(entity);
+            var result = _unitOfWork.Commit();
+
+            var state = await _unitOfWork.States.GetAsync(request.CountryId);
+            var stateDto = _mapper.Map<StateDto>(state);
+
+            return stateDto;
+        }
+
+        public async Task<StateDto> UpdateStateAsync(StateDto request)
+        {
+            var entity = _mapper.Map<State>(request);
+            await _unitOfWork.States.UpdateAsync(entity);
+            var result = _unitOfWork.Commit();
+
+            var state = await _unitOfWork.States.GetAsync(request.CountryId);
+            var stateDto = _mapper.Map<StateDto>(state);
+
+            return stateDto;
+        }
+
+        public async Task<StateDto> DeleteStateAsync(StateDto request)
+        {
+            var entity = _mapper.Map<State>(request);
+            await _unitOfWork.States.DeleteAsync(entity);
+            var result = _unitOfWork.Commit();
+
+            return request;
         }
     }
 }

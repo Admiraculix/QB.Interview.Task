@@ -1,6 +1,8 @@
 ﻿using QB.Application.Interfaces.Repositories;
 using QB.Domain.Models;
 using QB.Persistence.Sqlite.Repositories.Base;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace QB.Persistence.Sqlite.Repositories
 {
@@ -10,6 +12,13 @@ namespace QB.Persistence.Sqlite.Repositories
             : base(context)
         {
 
+        }
+
+        public async Task<Country> FindCountryByNameAsync(string name)
+        {
+            var result = await _context.Country.AsAsyncEnumerable()
+                .SingleOrDefaultAsync(x => x.CountryName == name);
+            return result;
         }
     }
 }

@@ -19,10 +19,10 @@ namespace QB.Persistence.Sqlite.Repositories
         //! The 'new' is intended to hide inherited GetAllAsync(); method.
         new public async Task<IEnumerable<State>> GetAllAsync()
         {
-            var states = _context.State.AsAsyncEnumerable().OrderBy(x => x.StateId);
-            var result = await states.ToListAsync();
-            result.RemoveAt(0);
-
+            var result = await _context.State.AsAsyncEnumerable()
+                            .OrderBy(x => x.StateId)
+                            .Where(x => x.StateId > 0)
+                            .ToListAsync();
             return result;
         }
     }

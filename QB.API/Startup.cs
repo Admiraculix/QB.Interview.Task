@@ -6,12 +6,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using QB.API.AutoMapper.Profiles;
+using QB.API.WebMiddlewares;
 using QB.Application.AutoMapper.Profiles;
 using QB.Application.Configurations;
 using QB.Application.Extensions;
 using QB.External.Rest.Service.Extensions;
 using QB.Persistence.Extensions;
 using System;
+using System.IO;
 using System.Reflection;
 
 namespace QB.Presentation
@@ -57,6 +59,11 @@ namespace QB.Presentation
                         Url = new Uri("https://en.wikipedia.org/wiki/MIT_License"),
                     }
                 });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
         }
 
@@ -84,6 +91,8 @@ namespace QB.Presentation
 
             app.UseAuthorization();
 
+            // global error handler
+            app.UseMiddleware<ErrorHandlerMiddleware>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

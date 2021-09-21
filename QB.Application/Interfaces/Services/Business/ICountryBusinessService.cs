@@ -10,5 +10,8 @@ namespace QB.Application.Interfaces.Services.Business
         Task<CountryDto> GetCountryByIdAsync(CountryDto request);
         Task<IEnumerable<CountryDto>> GetAllCountriesAsync();
         Task<IEnumerable<CountryPopulationDto>> GetAllPopulationOfCountriesAsync();
+        Task<CountryDto> CreateCountryAsync(CountryDto request);
+        Task<CountryDto> UpdateCountryAsync(CountryDto request);
+        Task<CountryDto> DeleteCountryAsync(CountryDto request);
     }
 }

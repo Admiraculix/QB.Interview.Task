@@ -16,8 +16,9 @@ namespace QB.Persistence.Sqlite.Repositories
 
         public async Task<IEnumerable<City>> GetAllAsync(int stateId)
         {
-            var cities = _context.City.AsAsyncEnumerable().Where(x => x.StateId == stateId);
-            var result = await cities.ToListAsync();
+            var result = await _context.City.AsAsyncEnumerable()
+                                .Where(x => x.StateId == stateId)
+                                .ToListAsync();
             return result;
         }
     }

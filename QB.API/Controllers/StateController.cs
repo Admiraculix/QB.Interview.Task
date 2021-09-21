@@ -36,5 +36,54 @@ namespace QB.API.Controllers
 
             return Ok(response);
         }
+        /// <summary>
+        /// NOT WORK!!!
+        /// Adds the new state asynchronous.
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <returns></returns>
+        [HttpPost()]
+        public async Task<IActionResult> AddNewStateAsync([FromBody] StateRequest request)
+        {
+            var dtoRequest = Mapper.Map<StateDto>(request);
+            var result = await _stateBusinessService.CreateStateAsync(dtoRequest);
+            var response = Mapper.Map<StateResponse>(result);
+
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// NOT WORK!!!
+        /// Updates the state name asynchronous.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="request">The request.</param>
+        /// <returns></returns>
+        [HttpPut("{id}/Name")]
+        public async Task<IActionResult> UpdateStateNameAsync([FromRoute] int id, [FromBody] StateRequest request)
+        {
+            request.Id = id;
+            var dtoRequest = Mapper.Map<StateDto>(request);
+            var result = await _stateBusinessService.UpdateStateAsync(dtoRequest);
+            var response = Mapper.Map<StateResponse>(result);
+
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// NOT WORK!!!
+        /// Deletes the state by identifier asynchronous.
+        /// </summary>
+        /// <param name="request">The request.</param>
+        /// <returns></returns>
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteStateByIdAsync([FromRoute] GetStateByIdRequest request)
+        {
+            var dtoRequest = Mapper.Map<StateDto>(request);
+            var result = await _stateBusinessService.DeleteStateAsync(dtoRequest);
+            var response = Mapper.Map<StateResponse>(result);
+
+            return Ok(response);
+        }
     }
 }
