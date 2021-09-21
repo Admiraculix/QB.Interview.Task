@@ -18,6 +18,8 @@ namespace QB.Presentation
 {
     public class Startup
     {
+        private const string _corsPolicyName = "default";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,6 +31,17 @@ namespace QB.Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+
+            services.AddCors(options =>
+                options.AddPolicy(
+                 _corsPolicyName,
+                 builder =>
+                 {
+                     builder.AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                 }));
 
             services.RegisterPersistenceDepenencies(Configuration);
             services.RegisterApplicationServiceDepenencies();
@@ -77,6 +90,8 @@ namespace QB.Presentation
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "QB Interview API");
                 c.RoutePrefix = string.Empty;
             });
+
+            app.UseCors(_corsPolicyName);
 
             app.UseHttpsRedirection();
 
