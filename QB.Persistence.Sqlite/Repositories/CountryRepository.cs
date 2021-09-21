@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QB.Persistence.Sqlite.Repositories
 {
-    public class CountryRepository : GenericRepositoryAsync<Country>, ICountryRepository
+    public class CountryRepository : BaseRepositoryAsync<Country>, ICountryRepository
     {
         public CountryRepository(SqliteDbContext context)
             : base(context)

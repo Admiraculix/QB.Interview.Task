@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QB.Persistence.Sqlite.Repositories.Base
+namespace Persistance.Abstractions
 {
     public abstract class GenericRepositoryAsync<TEntity>
         : IGenericRepositoryAsync<TEntity> where TEntity : class
     {
-        protected readonly SqliteDbContext _context;
+        protected readonly DbContext _context;
 
-        protected GenericRepositoryAsync(SqliteDbContext context)
+        protected GenericRepositoryAsync(DbContext context)
         {
             _context = context;
         }

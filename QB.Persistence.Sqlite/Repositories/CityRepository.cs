@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QB.Persistence.Sqlite.Repositories
 {
-    public class CityRepository : GenericRepositoryAsync<City>, ICityRepository
+    public class CityRepository : BaseRepositoryAsync<City>, ICityRepository
     {
         public CityRepository(SqliteDbContext context)
             : base(context)
